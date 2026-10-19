@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "./Nav.astro";
+import Hero from "./Hero.astro";
+import SkillGroup from "./SkillGroup.astro";
+import Credentials from "./Credentials.astro";
+import ProjectCard from "./ProjectCard.astro";
+import Footer from "./Footer.astro";
+import { skillGroups } from "../data/skills";
+import { projects } from "../data/projects";
+import { useTranslations, type Lang } from "../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang}>
+  <Nav lang={lang} />
+  <main>
+    <Hero lang={lang} />
+
+    <section id="skills" class="mx-auto max-w-7xl px-6 py-16">
+      <h2 class="mb-8 text-3xl font-bold">{t("skills.heading")}</h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+        {skillGroups.map((g) => (
+          <SkillGroup title={t(g.titleKey)} skills={g.skills} wide={g.wide} />
+        ))}
+      </div>
+    </section>
+
+    <Credentials lang={lang} />
+
+    <section id="projects" class="mx-auto max-w-7xl px-6 py-16">
+      <h2 class="mb-8 text-3xl font-bold">{t("projects.heading")}</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p) => (
+          <ProjectCard
+            title={p.title}
+            description={p.description[lang]}
+            stack={p.stack}
+            links={p.links}
+            note={p.note?.[lang]}
+          />
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer lang={lang} />
+</Layout>

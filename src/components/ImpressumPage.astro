@@ -1,0 +1,93 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+import { useTranslations, type Lang } from "../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const t = useTranslations(lang);
+const homeHref = lang === "de" ? "/de/" : "/";
+
+// TODO: replace with your real details
+const owner = {
+  name: "Jerin George",
+  street: "[Street and house number]",
+  city: "[PIN code] [City]",
+  region: "Kerala, India",
+  email: "your-email@jeringeorge.online",
+};
+
+const content = {
+  en: {
+    title: "Impressum (Legal Notice) | Jerin George",
+    heading: "Impressum",
+    sub: "Information pursuant to § 5 DDG",
+    provider: "Provider",
+    contact: "Contact",
+    emailLabel: "Email",
+    purpose: "Purpose of this website",
+    purposeText:
+      "This is a private personal portfolio website. It presents my professional background and projects and does not offer commercial services.",
+    links: "Liability for links",
+    linksText:
+      "This website links to external sites (for example GitHub and LinkedIn). I have no influence on their content and am not responsible for it. The respective provider is responsible for the content of linked pages.",
+  },
+  de: {
+    title: "Impressum | Jerin George",
+    heading: "Impressum",
+    sub: "Angaben gemäß § 5 DDG",
+    provider: "Anbieter",
+    contact: "Kontakt",
+    emailLabel: "E-Mail",
+    purpose: "Zweck der Website",
+    purposeText:
+      "Dies ist eine private, persönliche Portfolio-Website. Sie stellt meinen beruflichen Werdegang und meine Projekte vor und bietet keine kommerziellen Leistungen an.",
+    links: "Haftung für Links",
+    linksText:
+      "Diese Website enthält Links zu externen Websites (zum Beispiel GitHub und LinkedIn). Auf deren Inhalte habe ich keinen Einfluss und übernehme dafür keine Gewähr. Für die Inhalte verlinkter Seiten ist stets der jeweilige Anbieter verantwortlich.",
+  },
+}[lang];
+---
+
+<Layout lang={lang} title={content.title} path="impressum/">
+  <Nav lang={lang} path="impressum/" />
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <a href={homeHref} class="text-sm text-teal-300 transition hover:text-teal-200">
+      ← {t("impressum.back")}
+    </a>
+
+    <h1 class="mt-6 text-4xl font-bold">{content.heading}</h1>
+    <p class="mt-2 text-slate-300">{content.sub}</p>
+
+    <div class="mt-10 space-y-8 text-slate-300">
+      <section>
+        <h2 class="mb-2 text-xl font-semibold text-white">{content.provider}</h2>
+        <p>
+          {owner.name}<br />
+          {owner.street}<br />
+          {owner.city}<br />
+          {owner.region}
+        </p>
+      </section>
+
+      <section>
+        <h2 class="mb-2 text-xl font-semibold text-white">{content.contact}</h2>
+        <p>
+          {content.emailLabel}:
+          <a href={`mailto:${owner.email}`} class="text-teal-300 hover:underline">{owner.email}</a>
+        </p>
+      </section>
+
+      <section>
+        <h2 class="mb-2 text-xl font-semibold text-white">{content.purpose}</h2>
+        <p>{content.purposeText}</p>
+      </section>
+
+      <section>
+        <h2 class="mb-2 text-xl font-semibold text-white">{content.links}</h2>
+        <p>{content.linksText}</p>
+      </section>
+    </div>
+  </main>
+  <Footer lang={lang} />
+</Layout>

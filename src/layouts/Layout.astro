@@ -1,0 +1,31 @@
+---
+import "../styles/global.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import { useTranslations, type Lang } from "../i18n/ui";
+
+const {
+  lang = "en",
+  title,
+  path = "",
+} = Astro.props as { lang?: Lang; title?: string; path?: string };
+
+const t = useTranslations(lang);
+const site = Astro.site?.origin ?? "";
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={t("meta.description")} />
+    <title>{title ?? t("meta.title")}</title>
+    <link rel="alternate" hreflang="en" href={`${site}/${path}`} />
+    <link rel="alternate" hreflang="de" href={`${site}/de/${path}`} />
+  </head>
+  <body class="font-sans text-slate-100 antialiased">
+    <slot />
+  </body>
+</html>

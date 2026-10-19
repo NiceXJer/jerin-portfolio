@@ -1,0 +1,17 @@
+---
+const { title, skills, wide = false } = Astro.props;
+---
+
+<div class:list={["rounded-2xl border border-white/10 bg-white/5 p-6", wide && "lg:col-span-2"]}>
+  <h3 class="mb-5 text-xl font-semibold">
+    <span class="mr-2 text-teal-400">//</span>{title}
+  </h3>
+  <div class="flex flex-wrap gap-3">
+    {skills.map((s) => (
+      <span class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">
+        {s.icon && <img src={`/icons/${s.icon}`} alt="" class="h-5 w-5" />}
+        {s.name}
+      </span>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,41 @@
+---
+import { useTranslations, type Lang } from "../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const t = useTranslations(lang);
+
+const email = "your-email@jeringeorge.online"; // TODO: your real address
+const github = "https://github.com/";
+const linkedin = "https://www.linkedin.com/in/";
+const impressumHref = lang === "de" ? "/de/impressum/" : "/impressum/";
+const year = new Date().getFullYear();
+---
+
+<footer id="contact" class="mt-8 border-t border-white/10">
+  <div class="mx-auto max-w-7xl px-6 py-14">
+    <h2 class="text-3xl font-bold">{t("contact.heading")}</h2>
+    <p class="mt-3 max-w-2xl text-slate-300">{t("contact.text")}</p>
+
+    <div class="mt-6 flex flex-wrap gap-4">
+      <a
+        href={`mailto:${email}`}
+        class="rounded-full bg-teal-400 px-7 py-3 font-semibold text-slate-900 transition hover:bg-teal-300"
+      >
+        {email}
+      </a>
+      <a href={github} target="_blank" rel="noopener"
+        class="rounded-full border border-teal-400/60 px-6 py-3 text-teal-300 transition hover:bg-teal-400/10">
+        GitHub
+      </a>
+      <a href={linkedin} target="_blank" rel="noopener"
+        class="rounded-full border border-teal-400/60 px-6 py-3 text-teal-300 transition hover:bg-teal-400/10">
+        LinkedIn
+      </a>
+    </div>
+
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-slate-400">
+      <p>© {year} Jerin George · {t("footer.note")}</p>
+      <a href={impressumHref} class="transition hover:text-teal-300">{t("footer.impressum")}</a>
+    </div>
+  </div>
+</footer>

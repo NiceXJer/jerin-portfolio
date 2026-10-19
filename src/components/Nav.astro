@@ -1,0 +1,68 @@
+---
+import { useTranslations, type Lang } from "../i18n/ui";
+
+const { lang = "en", path = "" } = Astro.props as { lang?: Lang; path?: string };
+const t = useTranslations(lang);
+
+const homePath = lang === "de" ? "/de/" : "/";
+
+const links = [
+  { label: t("nav.home"), href: `${homePath}#home` },
+  { label: t("nav.about"), href: `${homePath}#about` },
+  { label: t("nav.skills"), href: `${homePath}#skills` },
+  { label: t("nav.projects"), href: `${homePath}#projects` },
+  { label: t("nav.contact"), href: `${homePath}#contact` },
+];
+
+const langs = [
+  { code: "en", label: "EN", href: `/${path}` },
+  { code: "de", label: "DE", href: `/de/${path}` },
+];
+---
+
+<header class="sticky top-0 z-50 bg-[#0b1426]/70 backdrop-blur">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+    <a href={`${homePath}#home`} class="text-lg font-semibold tracking-wide">
+      <span class="text-teal-400">JG</span>
+      <span class="text-slate-500"> / </span>
+      <span>JERIN GEORGE</span>
+    </a>
+
+    <div class="flex items-center gap-4 md:gap-8">
+      <ul class="hidden gap-8 md:flex">
+        {links.map((l) => (
+          <li>
+            <a href={l.href} class="text-slate-200 transition hover:text-teal-400">{l.label}</a>
+          </li>
+        ))}
+      </ul>
+
+      <span class="hidden rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-sm lg:inline">
+        {t("nav.badge")}
+      </span>
+
+      <div
+        class="flex rounded-lg border border-white/15 bg-white/5 p-0.5 text-sm font-semibold"
+        role="group"
+        aria-label="Language"
+      >
+        {langs.map((l) => (
+          <a
+            href={l.href}
+            hreflang={l.code}
+            lang={l.code}
+            aria-current={lang === l.code ? "true" : undefined}
+            class:list={[
+              "rounded-md px-3 py-1 transition",
+              lang === l.code
+                ? "bg-teal-400 text-slate-900"
+                : "text-slate-300 hover:text-teal-300",
+            ]}
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>

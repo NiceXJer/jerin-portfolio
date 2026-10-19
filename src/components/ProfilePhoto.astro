@@ -1,0 +1,106 @@
+---
+const {
+  src = "/hero-orginal.png",
+  alt = "Jerin George",
+} = Astro.props;
+---
+
+<div class="profile-photo">
+
+  <!-- Circle background -->
+  <div class="circle-bg"></div>
+
+  <!-- Full ring, BEHIND the portrait (head covers it) -->
+  <div class="neon-circle neon-back"></div>
+
+  <!-- Inner ring sits slightly inside the main circle -->
+  <div class="inner-ring"></div>
+
+  <!-- Portrait -->
+  <img src={src} alt={alt} class="portrait" />
+
+  <!-- Bottom half of ring, IN FRONT of the portrait (crosses the shirt) -->
+  <div class="neon-circle neon-front"></div>
+
+</div>
+
+<style>
+  .profile-photo {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    overflow: visible;
+  }
+
+  .circle-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 50% 35%,
+      rgba(20, 70, 82, 0.95) 0%,
+      rgba(15, 40, 55, 0.98) 55%,
+      rgba(8, 25, 40, 1) 100%
+    );
+    z-index: 1;
+  }
+
+  .portrait {
+    position: absolute;
+    bottom: -11%;
+    left: 50%;
+    height: 135%;
+    width: auto;
+    object-fit: contain;
+
+    /* the old hover size is now the normal size */
+    transform: translateX(-50%) scale(1.38);
+
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .neon-circle {
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+
+  border: 5px solid rgba(45, 212, 191, 0.95);
+
+  box-shadow:
+    0 0 18px rgba(45, 212, 191, 0.8),
+    0 0 20px rgba(45, 212, 191, 0.35),
+    0 0 35px rgba(45, 212, 191, 0.15);
+
+  pointer-events: none;
+}
+
+  .inner-ring {
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(94, 234, 212, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.15);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* behind the portrait */
+  .neon-back {
+    z-index: 3;
+  }
+
+  /* above the portrait, only the bottom half is visible */
+  .neon-front {
+    z-index: 4;
+    clip-path: inset(50% -30px -30px -30px);
+  }
+
+  @media (max-width: 1024px) {
+    .profile-photo {
+      width: 290px;
+      height: 290px;
+    }
+  
+  }
+</style>
