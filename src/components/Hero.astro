@@ -5,8 +5,8 @@ import { useTranslations, type Lang } from "../i18n/ui";
 const { lang = "en" } = Astro.props as { lang?: Lang };
 const t = useTranslations(lang);
 
-const github = "https://github.com/";
-const linkedin = "https://www.linkedin.com/in/";
+const github = "https://github.com/NiceXJer";
+const linkedin = "https://www.linkedin.com/in/jerin-george-792950147/";
 ---
 
 <section
@@ -23,10 +23,11 @@ const linkedin = "https://www.linkedin.com/in/";
     <p class="mt-6 max-w-2xl text-2xl font-light text-slate-300 lg:text-3xl">
       {t("hero.subtitle")}
     </p>
+    
     <p
       class="mt-5 max-w-2xl text-lg text-slate-300 lg:text-xl [&_strong]:font-semibold [&_strong]:text-white"
       set:html={t("hero.body")}
-    />
+    /> 
 
     <div class="mt-10 flex flex-wrap gap-4">
       <a
