@@ -28,7 +28,10 @@ const t = useTranslations(lang);
       </div>
     </section>
 
-    <Credentials lang={lang} />
+    <section id="credentials" class="mx-auto max-w-7xl px-6 py-16">
+      <h2 class="mb-8 text-3xl font-bold">{t("skills.credentials")}</h2>
+      <Credentials lang={lang} />
+    </section>
 
     <section id="projects" class="mx-auto max-w-7xl px-6 py-16">
       <h2 class="mb-8 text-3xl font-bold">{t("projects.heading")}</h2>

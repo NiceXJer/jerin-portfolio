@@ -22,6 +22,26 @@ export const projects: ProjectData[] = [
     },
   },
   {
+    title: "Orthanc PACS & Clinical Interoperability Lab",
+    description: {
+      en: "Containerized healthcare IT testing environment integrating medical imaging archives with clinical messaging pipelines. Configured Orthanc PACS over Docker with a PostgreSQL backend, validated DICOM operations (C-ECHO, C-STORE, C-FIND, C-MOVE), and built Mirth Connect channels for HL7 v2 (ORM/ADT) message transformation into FHIR R4 JSON bundles over MLLP.",
+      de: "Containerbasierte IT-Testumgebung für das Gesundheitswesen, die medizinische Bildarchive mit klinischen Nachrichten-Pipelines verknüpft. Hierfür wurde ein Orthanc-PACS mittels Docker und einem PostgreSQL-Backend konfiguriert, DICOM-Operationen (C-ECHO, C-STORE, C-FIND, C-MOVE) validiert sowie Mirth-Connect-Kanäle implementiert, um HL7-v2-Nachrichten (ORM/ADT) über MLLP in FHIR-R4-JSON-Bundles zu transformieren.",
+    },
+    // TODO: add your state management / architecture here, e.g. "GetX", "MVC"
+    stack: ["Docker", "PostgreSQL", "Mirth Connect", "HL7 v2 / MLLP", "FHIR R4", "DICOM / DICOMweb", "Orthanc PACS"],
+    links: [
+        {
+            label: "GitHub",
+            href: "https://github.com/NiceXJer/orthanc-postgres-docker-pacs",
+        }
+    ],
+    note: {
+      en: "Client project, no public link.",
+      de: "Kundenprojekt, kein öffentlicher Link.",
+    },
+  },
+  
+  {
     title: "360 Degree",
     description: {
       en: "Mobile app for clinic administrators to control remote processes (reboot, shutdown, logout) and monitor system performance in real time.",
